@@ -25,7 +25,7 @@ class _ShoppageState extends State<ShopPage> {
           child: Column(
             children: [
               const Text("What would you like to order?",
-                  style: TextStyle(fontSize: 25)),
+                  style: TextStyle(fontSize: 17)),
               const SizedBox(height: 25),
               Expanded(
                   child: ListView.builder(

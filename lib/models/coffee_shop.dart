@@ -1,30 +1,30 @@
 import 'package:coffee_shop/models/coffee.dart';
 import 'package:flutter/material.dart';
 
-import 'coffee.dart';
+// import 'coffee.dart';
 
 class CoffeeShop extends ChangeNotifier {
   //Coffeelist
   final List<Coffee> shop = [
     Coffee(
-      name: 'Latte',
+      name: 'Iced Latte',
       price: "70 Rs",
-      imagepath: "lib/images/coffee-logo-clipart-lg.png",
+      imagepath: "assets/images/iced-latte.png",
     ),
     Coffee(
-      name: 'Hazelnut Latte',
+      name: 'Caramel Latte',
       price: "70 Rs",
-      imagepath: "lib/images/coffee-logo-clipart-lg.png",
+      imagepath: "assets/images/latte.png",
     ),
     Coffee(
-      name: 'Cappacunio',
-      price: "70 Rs",
-      imagepath: "lib/images/Coffee-logo-illustration-on-transparent-background-PNG.png",
+      name: 'Cappuccino',
+      price: "45 Rs",
+      imagepath: "assets/images/cappuccino.png",
     ),
     Coffee(
-      name: 'Latte',
+      name: 'Espresso',
       price: "70 Rs",
-      imagepath: "lib/images/coffee-logo-clipart-lg.png",
+      imagepath: "assets/images/espresso.png",
     ),
   ];
 
