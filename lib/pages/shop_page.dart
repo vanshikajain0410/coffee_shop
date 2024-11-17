@@ -29,7 +29,7 @@ class _ShoppageState extends State<ShopPage> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
-              const Text("What would you like to order?",
+              const Text("What are you craving?",
                   style: TextStyle(fontSize: 17)),
               const SizedBox(height: 25),
               Expanded(

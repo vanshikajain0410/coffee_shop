@@ -1,3 +1,4 @@
+import 'package:coffee_shop/login_page.dart';
 import 'package:coffee_shop/models/coffee_shop.dart';
 
 import 'package:flutter/material.dart';
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CoffeeShop(),
-      builder: (context, child) => const MaterialApp(
+      builder: (context, child) =>  MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: LoginPage(),
       ),
     );
   }
