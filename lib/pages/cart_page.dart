@@ -12,15 +12,14 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  void removefromcart(Coffee coffee) {
-    Provider.of<CoffeeShop>(context, listen: false).deleteItemtocart(coffee);
+  // remove item from cart
 
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text("Successfully added to cart"),
-            ));
+  void removefromcart(Coffee coffee) {
+    Provider.of<CoffeeShop>(context, listen: false).deleteItemfromcart(coffee);
   }
+
+  //pay button taped
+  void payNow() {}
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +45,24 @@ class _CartPageState extends State<CartPage> {
                         icon: Icon(Icons.delete),
                       );
                     }),
+              ),
+              //pay button
+              GestureDetector(
+                onTap: payNow,
+                child: Container(
+                  padding: EdgeInsets.all(25),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.brown,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Pay Now",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
               )
             ],
           ),

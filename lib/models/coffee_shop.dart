@@ -44,7 +44,7 @@ class CoffeeShop extends ChangeNotifier {
   }
 
   //delete
-  void deleteItemtocart(Coffee coffee) {
+  void deleteItemfromcart(Coffee coffee) {
     usercart.remove(coffee);
     notifyListeners();
   }
