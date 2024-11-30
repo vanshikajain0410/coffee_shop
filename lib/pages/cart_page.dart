@@ -1,3 +1,4 @@
+import 'package:coffee_shop/pages/order_confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +16,13 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   // Handle "pay now" functionality
   void payNow() {
-    // Implement payment functionality here
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Order confirmed!")),
-    );
+    // Navigate to the order confirmation page
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const OrderConfirmation(),
+    ),
+  );
   }
 
   @override
