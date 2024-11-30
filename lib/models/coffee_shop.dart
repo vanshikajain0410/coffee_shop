@@ -29,23 +29,46 @@ class CoffeeShop extends ChangeNotifier {
   ];
 
   //usercart
-  List<Coffee> usercart = [];
+  final List<Map<Coffee, int>> usercart = [];
 
   //getcoffeelist
   List<Coffee> get coffeeshopt => shop;
 
   //getusercart
-  List<Coffee> get userCart => usercart;
+ List<Map<Coffee, int>> get userCart => usercart;
 
   //add
   void addItemtocart(Coffee coffee) {
-    usercart.add(coffee);
+    // Check if the item already exists in the cart
+    int index = usercart.indexWhere((item) => item.keys.first == coffee);
+    if (index != -1) {
+      // If exists, increase the quantity
+      usercart[index][coffee] = usercart[index][coffee]! + 1;
+    } else {
+      // If not, add as a new item with quantity 1
+      usercart.add({coffee: 1});
+    }
     notifyListeners();
   }
 
   //delete
-  void deleteItemfromcart(Coffee coffee) {
-    usercart.remove(coffee);
+  void deleteItemFromCart(Coffee coffee) {
+    usercart.removeWhere((item) => item.keys.first == coffee);
     notifyListeners();
   }
+
+  // Decrease the quantity of an item
+  void decreaseQuantity(Coffee coffee) {
+    int index = usercart.indexWhere((item) => item.keys.first == coffee);
+    if (index != -1) {
+      if (usercart[index][coffee]! > 1) {
+        // Decrease the quantity if it's greater than 1
+        usercart[index][coffee] = usercart[index][coffee]! - 1;
+      } else {
+        // Remove the item if quantity is 1
+        usercart.removeAt(index);
+      }
+      notifyListeners();
+    }
+}
 }

@@ -17,7 +17,11 @@ class _ShoppageState extends State<ShopPage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("Successfully added to cart"),
+              title: Center(
+                  child: Text(
+                "Successfully added to cart",
+                style: TextStyle(fontSize: 17),
+              )),
             ));
   }
 

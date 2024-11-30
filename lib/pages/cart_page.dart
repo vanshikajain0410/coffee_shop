@@ -1,8 +1,9 @@
-import 'package:coffee_shop/components/coffeetile.dart';
-import 'package:coffee_shop/models/coffee.dart';
-import 'package:coffee_shop/models/coffee_shop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../components/coffeetile.dart';
+import '../models/coffee.dart';
+import '../models/coffee_shop.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -12,14 +13,13 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  // remove item from cart
-
-  void removefromcart(Coffee coffee) {
-    Provider.of<CoffeeShop>(context, listen: false).deleteItemfromcart(coffee);
+  // Handle "pay now" functionality
+  void payNow() {
+    // Implement payment functionality here
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Order confirmed!")),
+    );
   }
-
-  //pay button taped
-  void payNow() {}
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +31,63 @@ class _CartPageState extends State<CartPage> {
             children: [
               Text(
                 'Your Cart',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              const SizedBox(height: 10),
               Expanded(
-                child: ListView.builder(
-                    itemCount: value.userCart.length,
-                    itemBuilder: (context, index) {
-                      Coffee eachCoffee = value.userCart[index];
+                child: value.userCart.isEmpty
+                    ? Center(
+                        child: Text(
+                          "Your cart is empty",
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: value.userCart.length,
+                        itemBuilder: (context, index) {
+                          // Extract the coffee item and its quantity
+                          Coffee coffee = value.userCart[index].keys.first;
+                          int quantity = value.userCart[index][coffee]!;
 
-                      return Coffeetile(
-                        coffee: eachCoffee,
-                        onPressed: () => removefromcart(eachCoffee),
-                        icon: Icon(Icons.delete),
-                      );
-                    }),
+                          return Coffeetile(
+                            coffee: coffee,
+                            icon: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.keyboard_arrow_down, color: const Color.fromARGB(255, 173, 48, 39)),
+                                  onPressed: () {
+                                    value.decreaseQuantity(coffee);
+                                  },
+                                ),
+                                Text(
+                                  '$quantity',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.keyboard_arrow_up, color: const Color.fromARGB(255, 67, 148, 70)),
+                                  onPressed: () {
+                                    value.addItemtocart(coffee);
+                                  },
+                                ),
+                              ],
+                            ),
+                            onPressed: () {
+                              value.deleteItemFromCart(coffee);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("${coffee.name} removed!"),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
               ),
-              //pay button
               GestureDetector(
                 onTap: payNow,
                 child: Container(
-                  padding: EdgeInsets.all(25),
+                  padding: const EdgeInsets.all(25),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.brown,
@@ -58,12 +95,16 @@ class _CartPageState extends State<CartPage> {
                   ),
                   child: Center(
                     child: Text(
-                      "Pay Now",
-                      style: TextStyle(color: Colors.white),
+                      "Confirm Order",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
