@@ -26,6 +26,26 @@ class CoffeeShop extends ChangeNotifier {
       price: "70 Rs",
       imagepath: "assets/images/espresso.png",
     ),
+    Coffee(
+      name: 'Burrito',
+      price: "50 Rs",
+      imagepath: "assets/images/burrito.png",
+    ),
+    Coffee(
+      name: 'Ramen',
+      price: "60 Rs",
+      imagepath: "assets/images/ramen.png",
+    ),
+    Coffee(
+      name: 'Chocolate Bar',
+      price: "10 Rs",
+      imagepath: "assets/images/chocolate-bar.png",
+    ),
+    Coffee(
+      name: 'Sandwich',
+      price: "45 Rs",
+      imagepath: "assets/images/sandwich.png",
+    ),
   ];
 
   //usercart
