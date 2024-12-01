@@ -12,17 +12,43 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShoppageState extends State<ShopPage> {
-  void addtocart(Coffee coffee) {
-    Provider.of<CoffeeShop>(context, listen: false).addItemtocart(coffee);
+  void confirmAddToCart(Coffee coffee) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Center(
-                  child: Text(
-                "Successfully added to cart",
-                style: TextStyle(fontSize: 17),
-              )),
-            ));
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Add to Cart"),
+        content: Text("Do you want to add ${coffee.name} to the cart?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the dialog
+            },
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context); // Close the confirmation dialog
+              // Add the item to the cart
+              Provider.of<CoffeeShop>(context, listen: false)
+                  .addItemtocart(coffee);
+              // Show success dialog
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Center(
+                    child: Text(
+                      "Successfully added to cart",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+              );
+            },
+            child: const Text("Yes"),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -33,21 +59,26 @@ class _ShoppageState extends State<ShopPage> {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
-              const Text("What are you craving?",
-                  style: TextStyle(fontSize: 17)),
+              const Text(
+                "What are you craving?",
+                style: TextStyle(fontSize: 17),
+              ),
               const SizedBox(height: 25),
               Expanded(
-                  child: ListView.builder(
-                      itemCount: value.coffeeshopt.length,
-                      itemBuilder: (context, index) {
-                        //get individual coffee
-                        Coffee eachCoffee = value.coffeeshopt[index];
-                        //return the tile for this coffee
-                        return Coffeetile(
-                            coffee: eachCoffee,
-                            icon: Icon(Icons.add),
-                            onPressed: () => addtocart(eachCoffee));
-                      }))
+                child: ListView.builder(
+                  itemCount: value.coffeeshopt.length,
+                  itemBuilder: (context, index) {
+                    // Get individual coffee
+                    Coffee eachCoffee = value.coffeeshopt[index];
+                    // Return the tile for this coffee
+                    return Coffeetile(
+                      coffee: eachCoffee,
+                      icon: const Icon(Icons.add),
+                      onPressed: () => confirmAddToCart(eachCoffee),
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),
