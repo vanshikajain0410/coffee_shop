@@ -53,33 +53,35 @@ class _ShoppageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CoffeeShop>(
-      builder: (context, value, child) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            children: [
-              const Text(
-                "What are you craving?",
-                style: TextStyle(fontSize: 17),
-              ),
-              const SizedBox(height: 25),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: value.coffeeshopt.length,
-                  itemBuilder: (context, index) {
-                    // Get individual coffee
-                    Coffee eachCoffee = value.coffeeshopt[index];
-                    // Return the tile for this coffee
-                    return Coffeetile(
-                      coffee: eachCoffee,
-                      icon: const Icon(Icons.add),
-                      onPressed: () => confirmAddToCart(eachCoffee),
-                    );
-                  },
+    return Scaffold(
+      body: Consumer<CoffeeShop>(
+        builder: (context, value, child) => SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Column(
+              children: [
+                const Text(
+                  "What are you craving?",
+                  style: TextStyle(fontSize: 17),
                 ),
-              )
-            ],
+                const SizedBox(height: 25),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: value.coffeeshopt.length,
+                    itemBuilder: (context, index) {
+                      // Get individual coffee
+                      Coffee eachCoffee = value.coffeeshopt[index];
+                      // Return the tile for this coffee
+                      return Coffeetile(
+                        coffee: eachCoffee,
+                        icon: const Icon(Icons.add),
+                        onPressed: () => confirmAddToCart(eachCoffee),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -23,7 +23,10 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
+                SizedBox(height: 60,),
                 // logo coffee shop
 
                 Padding(
